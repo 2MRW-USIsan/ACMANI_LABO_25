@@ -1,0 +1,628 @@
+openapi: 3.0.3
+info:
+  title: ACMANI_VAULT
+  version: 1.0.0
+  description: ACMANI_LABO_APP
+paths:
+  /configs:
+    summary: Access to TABLE[Configs]
+    get:
+      description: Get Configs DATA
+      responses:
+        '200':
+          description: SUCCESS GET DATA [Configs]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      Weights:
+                        $ref: '#/components/schemas/Weights'
+                      Phrases:
+                        $ref: '#/components/schemas/Phrases'
+                      Constants:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Constants'
+    post:
+      description: Update Configs DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Configs'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /groups:
+    summary: Access to TABLE[Groups]
+    get:
+      description: Get Groups DATA LIST
+      responses:
+        '200':
+          description: SUCCESS GET DATA [Groups LIST]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Groups'
+    post:
+      description: Add Groups DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Groups'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Add]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /groups/{id}:
+    patch:
+      description: Update Groups DATA
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: group_id for PATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Groups'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
+      description: Delete Groups DATA
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: group_id for DELETE
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Groups'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Delete]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /tasks/{ids}:
+    summary: Access to TABLE[Task]
+    get:
+      description: Get Task DATA LIST
+      parameters:
+        - in: query
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+          description: task_id for GET LIST
+      responses:
+        '200':
+          description: SUCCESS GET DATA [Task LIST]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+  /posts:
+    summary: Access to TABLE[Posts]
+    post:
+      description: Add Posts DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Posts'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Add]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /posts/{id}:
+    summary: Access to TABLE[Posts]
+    patch:
+      description: Update Posts DATA
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: post_id for PATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Posts'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /prompts:
+    summary: Access to TABLE[Prompts]
+    post:
+      description: Add Prompts DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Prompts'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Add]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /prompts/{id}:
+    summary: Access to TABLE[Prompts]
+    patch:
+      description: Update Prompts DATA
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: prompt_id for PATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Prompts'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /requests:
+    summary: Access to TABLE[Request]
+    post:
+      description: Add Request DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Requests'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Add]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /requests/{id}:
+    summary: Access to TABLE[Request]
+    patch:
+      description: Update Request DATA
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: request_id for PATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Requests'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    Constants:
+      type: object
+      properties:
+        id:
+          type: number
+        Category:
+          type: string
+        isLewd:
+          type: boolean
+        Name:
+          type: string
+        Value:
+          type: string
+    Weights:
+      type: object
+      properties:
+        Model:
+          type: array
+          items:
+            type: integer
+        Theme:
+          type: array
+          items:
+            type: integer
+        Weathers:
+          type: array
+          items:
+            type: integer
+        Periods:
+          type: array
+          items:
+            type: integer
+        Angles:
+          type: array
+          items:
+            type: integer
+        Directions:
+          type: array
+          items:
+            type: integer
+        Focuses:
+          type: array
+          items:
+            type: integer
+    Phrases:
+      type: object
+      properties:
+        Header:
+          type: string
+        Footer:
+          type: string
+        Negative:
+          type: string
+        RequestOrder:
+          type: string
+        PlayingOrder:
+          type: string
+        PostingDescription:
+          type: string
+        ContentDescription:
+          type: string
+
+    Groups:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+    Task:
+      type: object
+      properties:
+        id:
+          type: number
+        group_id:
+          type: number
+        index:
+          type: number
+        name:
+          type: string
+
+    Posts:
+      type: object
+      properties:
+        id:
+          type: number
+        task_id:
+          type: number
+        Story:
+          type: string
+        TitleJP:
+          type: string
+        TitleEN:
+          type: string
+        TitleSymbol:
+          type: string
+        PictureCount:
+          type: string
+        WallpaperCount:
+          type: string
+        PictureURL:
+          type: string
+        WallpaperURL:
+          type: string
+        Notes:
+          type: array
+          items:
+            type: string
+    Prompts:
+      type: object
+      properties:
+        id:
+          type: number
+        task_id:
+          type: number
+        HEADER:
+          type: string
+        Basis:
+          type: string
+        Faces:
+          type: string
+        Hairs:
+          type: string
+        Figures:
+          type: string
+        Location:
+          type: string
+        Outfits:
+          type: string
+        Equips:
+          type: string
+        Emotes:
+          type: string
+        Fluids:
+          type: string
+        Upper:
+          type: string
+        Lower:
+          type: string
+        Actions:
+          type: string
+        Posing:
+          type: string
+        Additional:
+          type: string
+        FOOTER:
+          type: string
+    Requests:
+      type: object
+      properties:
+        id:
+          type: number
+        task_id:
+          type: number
+
+    Basis:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Model:
+          type: number
+        Thickness:
+          type: number
+        Theme:
+          type: number
+        Species:
+          type: string
+        SpeciesDetails:
+          type: string
+        Traits:
+          type: string
+        Traits Details:
+          type: string
+    Location:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Weathers:
+          type: number
+        Periods:
+          type: number
+        Times:
+          type: number
+        LocationsDetails:
+          type: string
+    Outfits:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Jobs:
+          type: string
+        JobsDetails:
+          type: string
+        OutfitsDetails:
+          type: string
+        EquipsDetails:
+          type: string
+    Hairs:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Size:
+          type: number
+        HairStyle:
+          type: string
+        BangsStyle:
+          type: string
+    Faces:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Looks:
+          type: number
+        Eyes:
+          type: number
+        Personality:
+          type: number
+        Moods:
+          type: number
+    Figures:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Thickness:
+          type: number
+        Boobs:
+          type: number
+        Bodies:
+          type: number
+        Butts:
+          type: number
+        SkinDetails:
+          type: string
+    Uppers:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Inverted:
+          type: number
+        Puffy:
+          type: number
+        Areola:
+          type: number
+        Nipples:
+          type: number
+    Lowers:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Model:
+          type: number
+        Public:
+          type: number
+        Size:
+          type: number
+        Sheath:
+          type: number
+        Foreskin:
+          type: number
+        GenitalDetails:
+          type: string
+    Colors:
+      type: object
+      properties:
+        request_id:
+          type: number
+        Theme:
+          type: number
+        Hair:
+          type: string
+        Eyes:
+          type: string
+        OutfitsMain:
+          type: string
+        OutfitsSub:
+          type: string
+        EquipsMain:
+          type: string
+        EquipsSub:
+          type: string
+        SkinMain:
+          type: string
+        SkinSub:
+          type: string
+        Nipples:
+          type: string
+        Genitals:
+          type: string
