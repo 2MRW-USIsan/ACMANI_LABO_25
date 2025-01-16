@@ -27,8 +27,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Constants'
-    post:
-      description: Update Configs DATA
+    put:
+      description: Update Configs [Weights, Phrases] DATA
       requestBody:
         required: true
         content:
@@ -37,7 +37,46 @@ paths:
               type: object
               properties:
                 data:
-                  $ref: '#/components/schemas/Configs'
+                  type: object
+                  properties:
+                    Weights:
+                      $ref: '#/components/schemas/Weights'
+                    Phrases:
+                      $ref: '#/components/schemas/Phrases'
+      responses:
+        '200':
+          description: SUCCESS MESSAGE [Update]
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      description: Update Configs [Constants] DATA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    create:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Constants'
+                    update:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Constants'
+                    delete:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Constants'
       responses:
         '200':
           description: SUCCESS MESSAGE [Update]
@@ -86,6 +125,7 @@ paths:
                   message:
                     type: string
   /groups/{id}:
+    summary: Access to TABLE[Groups]
     patch:
       description: Update Groups DATA
       parameters:
@@ -502,7 +542,7 @@ components:
           type: string
         Traits:
           type: string
-        Traits Details:
+        TraitsDetails:
           type: string
     Location:
       type: object

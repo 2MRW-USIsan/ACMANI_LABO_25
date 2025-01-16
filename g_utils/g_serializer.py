@@ -16,6 +16,12 @@ def generateSerializerHeader():
 from rest_framework import serializers
 from .models import *
 
+class BaseModelClassSerializer(serializers.ModelSerializer):
+  class Meta:
+    abstract = True
+    model = BaseModelClass
+    base_props   = [\"id\", \"created_at\", \"updated_at\", \"deleted_at\"]
+
 # =========+=========+=========+=========+=========+
 # Serializers
 # =========+=========+=========+=========+=========+
@@ -23,10 +29,9 @@ from .models import *
 
 def generateSerializerClass(name, data):
   return f"""
-class {name}Serializer(serializers.ModelSerializer):
+class {name}Serializer(BaseModelClassSerializer):
   class Meta:
     model = {name}
-    base_props   = [\"id\", \"created_at\", \"updated_at\", \"deleted_at\"]
     fields_props = {list(data.get('properties').keys())}
 # =========+=========+=========+=========+=========+
 """
